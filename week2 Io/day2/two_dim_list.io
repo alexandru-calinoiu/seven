@@ -25,6 +25,19 @@ MyList transpose := method(
 	result
 )
 
+MyList writeToFile := method(fileName,
+	f := File with(fileName)
+	f openForUpdating
+	for(i, 0, (self size) - 1, 
+		for(j, 0, (at(i) size) - 1,
+			f write(get(j, i) asString, " ")
+		)
+		f write("\n")
+	)		
+
+	f close
+)
+
 list = MyList clone
 
 list dim(10, 2)
@@ -33,3 +46,4 @@ list set(1, 0, 42)
 list println
 list get(1, 0) println
 list transpose println
+list writeToFile("matrix.txt")
